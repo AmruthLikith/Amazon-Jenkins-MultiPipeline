@@ -35,10 +35,11 @@ pipeline {
 
   post {
     success {
-        bat 'echo Build success'
+        bat '"C:\\Windows\\System32\\cmd.exe" /c echo Build success'
     }
     failure {
-        bat 'echo Failure in the build'
+        bat '"C:\\Windows\\System32\\cmd.exe" /c echo Failure in the build'
     }
+
 }
 }
