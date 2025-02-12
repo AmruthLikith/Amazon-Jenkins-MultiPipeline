@@ -24,7 +24,7 @@ pipeline {
                 bat '"mvn clean install"'
             }
         }
-    
+    }
 
     post {
         success {
@@ -35,4 +35,4 @@ pipeline {
         }
     } 
 }
-}
+
