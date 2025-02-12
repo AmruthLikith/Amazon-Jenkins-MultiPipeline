@@ -13,37 +13,32 @@ pipeline {
         }
         stage('compile') {
             steps {
-                sh 'mvn compile'
+                bat 'mvn compile'
             }
         }
         stage('test') {
             steps {
-                sh 'mvn test'
-                echo 'test add'
+                bat 'mvn test'
+                
             }
         }
     
         
         stage('build') {
             steps {
-                 sh 'mvn clean install'
+                 bat 'mvn clean install'
             }
         }
 
         
     }
 
-  post{
-
-  success{
-     echo 'Build success'
-  }
-    
-  failure{
-       echo 'Failure in the build'
-   }
-
-  }
-
-
+  post {
+    success {
+        bat 'echo Build success'
+    }
+    failure {
+        bat 'echo Failure in the build'
+    }
+}
 }
