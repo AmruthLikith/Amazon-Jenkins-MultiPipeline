@@ -1,9 +1,6 @@
 pipeline {
     agent any
-    environment {
-        // Use PATH+EXTRA to append to PATH properly
-        PATH = "/usr/bin:/bin:/opt/homebrew/bin"
-    }
+    
     stages {
 
         stage('pull') {
@@ -13,33 +10,28 @@ pipeline {
         }
         stage('compile') {
             steps {
-                bat 'mvn compile'
+                bat '"mvn compile"'
             }
         }
         stage('test') {
             steps {
-                bat 'mvn test'
-                
+                bat '"mvn test"'
+            }
+        }
+        stage('build') {
+            steps {
+                bat '"mvn clean install"'
             }
         }
     
-        
-        stage('build') {
-            steps {
-                 bat 'mvn clean install'
-            }
+
+    post {
+        success {
+            bat '"C:\\Windows\\System32\\cmd.exe" /c echo Build success"'
         }
-
-        
-    }
-
-  post {
-    success {
-        bat '"C:\\Windows\\System32\\cmd.exe" /c echo Build success'
-    }
-    failure {
-        bat '"C:\\Windows\\System32\\cmd.exe" /c echo Failure in the build'
-    }
-
+        failure {
+            bat '"C:\\Windows\\System32\\cmd.exe" /c echo Failure in the build"'
+        }
+    } 
 }
 }
